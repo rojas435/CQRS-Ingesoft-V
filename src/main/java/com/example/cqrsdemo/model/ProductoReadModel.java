@@ -1,27 +1,29 @@
 package com.example.cqrsdemo.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "productos")
-public class Producto {
+@Document(collection = "productos_read")
+public class ProductoReadModel {
     @Id
     private String id;
-    
-    @Column(name = "nombre")
     private String nombre;
-    
-    @Column(name = "precio")
     private double precio;
 
-    public Producto() {
+    public ProductoReadModel() {
         
     }
 
-    public Producto(String id, String nombre, double precio) {
+    public ProductoReadModel(String id, String nombre, double precio) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
+    }
+
+    public ProductoReadModel(Producto producto) {
+        this.id = producto.getId();
+        this.nombre = producto.getNombre();
+        this.precio = producto.getPrecio();
     }
 
     public String getId() {

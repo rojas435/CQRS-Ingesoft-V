@@ -1,28 +1,10 @@
 package com.example.cqrsdemo.repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.example.cqrsdemo.model.Producto;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public class ProductoRepository {
-    private final Map<String, Producto> productos = new HashMap<>();
+@Repository
+public interface ProductoRepository extends JpaRepository<Producto, String> {
 
-    public void save(Producto producto) {
-        productos.put(producto.getId(), producto);
-    }
-
-    public Producto findById(String id) {
-        return productos.get(id);
-    }
-
-    public List<Producto> findAll() {
-        return new ArrayList<>(productos.values());
-    }
-
-    public void deleteById(String id) {
-        productos.remove(id);
-    }
 }

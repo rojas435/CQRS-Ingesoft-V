@@ -2,17 +2,21 @@ package com.example.cqrsdemo.query;
 
 import java.util.List;
 
-import com.example.cqrsdemo.model.Producto;
-import com.example.cqrsdemo.repository.ProductoRepository;
+import com.example.cqrsdemo.model.ProductoReadModel;
+import com.example.cqrsdemo.repository.ProductoReadRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GetAllProductosHandler {
-    private final ProductoRepository repository;
+    private final ProductoReadRepository readRepository;
 
-    public GetAllProductosHandler(ProductoRepository repository) {
-        this.repository = repository;
+    @Autowired
+    public GetAllProductosHandler(ProductoReadRepository readRepository) {
+        this.readRepository = readRepository;
     }
 
-    public List<Producto> handle(GetAllProductosQuery query) {
-        return repository.findAll();
+    public List<ProductoReadModel> handle(GetAllProductosQuery query) {
+        return readRepository.findAll();
     }
 }

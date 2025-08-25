@@ -1,16 +1,22 @@
 package com.example.cqrsdemo.query;
 
-import com.example.cqrsdemo.model.Producto;
-import com.example.cqrsdemo.repository.ProductoRepository;
+import com.example.cqrsdemo.model.ProductoReadModel;
+import com.example.cqrsdemo.repository.ProductoReadRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
+@Service
 public class GetProductoByIdHandler {
-    private final ProductoRepository repository;
+    private final ProductoReadRepository readRepository;
 
-    public GetProductoByIdHandler(ProductoRepository repository) {
-        this.repository = repository;
+    @Autowired
+    public GetProductoByIdHandler(ProductoReadRepository readRepository) {
+        this.readRepository = readRepository;
     }
 
-    public Producto handle(GetProductoByIdQuery query) {
-        return repository.findById(query.getId());
+    public Optional<ProductoReadModel> handle(GetProductoByIdQuery query) {
+        return readRepository.findById(query.getId());
     }
 }
